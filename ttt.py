@@ -93,8 +93,10 @@ def board_update(u_in, i_con, b_mat):
 
     if x_weight > 0:
         win_plr = 'x'
-    if o_weight > 0:
+    elif o_weight > 0:
         win_plr = 'o'
+    elif all(element in 'xo' for element in b_mat):
+        win_plr = None
 
     if u_in[1] == 'x':
         player = 'o'
@@ -123,7 +125,10 @@ def main():
         user_input = input_prompt_and_check(current_player, game_matrix)
         game_matrix, current_player, winner = board_update(user_input, condition, game_matrix)
 
-    print(f"player '{winner}' has won the game. Congrats! ")
+    if winner is None:
+        print('The game is drawn. No winner. ')
+    else:
+        print(f"player '{winner}' has won the game. Congrats! ")
 
 
 

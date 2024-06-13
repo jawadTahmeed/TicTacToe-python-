@@ -65,20 +65,18 @@ def initials(in_mat):
 
 
 def input_prompt_and_check(c_player, t_mat):
-    is_correct = False
 
-    while(not is_correct):
+    while(True):
         in_v = input("Enter player 'o': ") if c_player == 'o' else input("Enter player 'x': ")
 
         if (check_if_input_format_is_valid(in_v, c_player) and check_if_input_cell_is_empty(in_v, t_mat)):
-            is_correct = True
             break
         else:
             print("Give input correctly.")
     return in_v
 
 
-def board_update(u_in, i_con, b_mat):
+def board_update(u_in, b_mat):
     win_plr = '.'
     player = '-'
 
@@ -112,7 +110,6 @@ def main():
     game_matrix = '123456789' # 9 chars
     winner = '.'
     user_input = '---'
-    condition = 'INIT'
     current_player = None
 
     current_player = initials(game_matrix)
@@ -123,7 +120,7 @@ def main():
 
     while(winner == '.'):
         user_input = input_prompt_and_check(current_player, game_matrix)
-        game_matrix, current_player, winner = board_update(user_input, condition, game_matrix)
+        game_matrix, current_player, winner = board_update(user_input, game_matrix)
 
     if winner is None:
         print('The game is drawn. No winner. ')
